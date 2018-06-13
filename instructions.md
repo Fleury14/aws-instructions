@@ -71,6 +71,8 @@ This file will have similar functionality to a docker-compose.
 
 My Example:
 
+(I removed the repo location and replaces with <REPOSDDRESS>)
+
 ```
 {
     "AWSEBDockerrunVersion": 2,
@@ -89,7 +91,7 @@ My Example:
         },
         {
             "name": "countability-server",
-            "image": "608308598267.dkr.ecr.us-west-2.amazonaws.com/countability-server:latest",
+            "image": "<REPOADDRESS>/countability-server:latest",
             "essential": true,
             "memoryReservation": 2048,
             "mountPoints": [
@@ -127,7 +129,7 @@ My Example:
         },
         {
             "name": "countability-client",
-            "image": "608308598267.dkr.ecr.us-west-2.amazonaws.com/countability-client:latest",
+            "image": "<REPOADDRESS>/countability-client:latest",
             "essential": true,
             "memoryReservation": 2048,
             "mountPoints": [
