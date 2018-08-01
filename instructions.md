@@ -25,6 +25,13 @@ I have two folders, one holding the client side angular application and the othe
 
 When composing locally, I run three containers: One for the client, one for the server, and a postgres image. There is no folder for the database because we aren't doing anything in the database in regards to building it or running an entrypoint script, it is just the image. That will come in to play later.
 
+### SERVER .env handling
+
+When deploying to AWS you will have to change how your .env is processed. Because of this, it is recommended that if you have to make the following changes, you either do so in a seperate branch, or conform your app to the following steps:
+- Remove all quotations from your .env
+- Inside the start method for the package.json, you will have to add an env command. My script looks like this: "start": "rimraf dist && gulp start && env $(cat .env) node --max-old-space-size=5000 dist/main.js". It is the env $(cat .env) that is new
+- Comment out the requirement of the env services (envfile and dotenv) inside your api.ts file.
+
 ### CLI Requirements
 
 You will need to install both the AWS CLI and the EB CLI. Both CLIs will also require Python to be installed as it utilizes the pip command.
