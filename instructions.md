@@ -51,7 +51,7 @@ The first step will be uploading the images into a docker image repository onto 
 
 - Open your docker terminal if you are on Windows. I believe Mac's have the docker machine initialized automatically so you can go to a normal terminal.
 Run the aws cli command listed on the push instructions:
-`aws ecr get-login --no-include-email --region us-west-2`
+`acd`
 There is a differnet command listed for Windows users, but I was able to run the above command as long as my docker terminal was up.
 The result of this command should be a large docker login string. That is the next command to run; copy that line, paste it into your terminal and run it.
 
@@ -77,7 +77,7 @@ This file will have similar functionality to a docker-compose.
 
 [Dockerrun MultiContainer Docker Configuration Guide](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_v2config.html)
 
-My Example:
+My Example\
 
 (I removed the repo location and replaces with <REPOSDDRESS>)
 
@@ -207,12 +207,12 @@ To test your deployment locally, run `eb local run`. This will bind to your curr
 
 You can also use `eb local status` in a seperate terminal to check the status of your local deployment. `docker ps` also relays some information. Pushing Control-C in the terminal that ran `eb local run` will stop the deployment, but it may not stop all the containers from running. You may have to shut them down with the command line or a program like Kitematic.
 
-### Step 5: Make sure your EB role has access to the repositorydocke
+### Step 5: Make sure your EB role has access to the repository
 
 To do this, you will need to search services for *IAM*. Under IAM resources click on *Roles: #* and find `aws-elasticbeanstalk-ec2-role` and click on it. Under the permissions tab, you will need to click the `Attach` button and apply the `AmazonEC2ContainerRegistryReadOnly` policy. This gives EB access to the images you just pushed.
 
 ### Step 6: git add/commit your Dockerrun.aws.json file
-
+e
 Or else it will not read it.
 
 ### Step 7: Create your environment
@@ -222,7 +222,7 @@ Using the `eb create <environment-name> <options>` command you can now build an 
 `-i <container-type i.e. t2.medium>` - Failure to include this automatically assigns you a t2.micro, which will probably not have enough memory for your app.  ie. `eb create -i t2.medium`
 `--single` - Loads your app as a single instance instead of having multiple images manages by a load balancer. Single is good for testing, but not for deployment.  (not used for cucrm)
 `--elb-type <load-balancer-type` specifies the type of loadbalancer to use. (We used `network`)
-`-k <keyname>` - Links an EC2 key pair you've created to use when attempting to SSH into your instance (We used `cucumber-key`)
+`-k <keyname>` - Links an EC2 key pair you've created to use when attemptingto SSH into your instance (We used `cucumber-key`)
 
 
 [eb create command detail](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb3-create.html)
@@ -236,7 +236,7 @@ You should see one security group with the name of the environment you clicked o
 You will probably only see ports for base http (80) and ssh (22). If your app requires any more ports to be access, be sure to add them here. Simply exposing them on the container level is not enough. (Make to add additonal ports for server (ie. Server: Custom TCP with Ports 3000-3010, and source anywhere; Database same as server except with ports 5432-5434))
 
 
-### Step 9: Does it work?
+### Step 9: Does it work
 
 You should be able to find your environment under *Elastic BEanstalk* from the services menu. Click on the environment you just created. There should be a url just under the title. If you redirected your front end to port 80, your app should open. But you may need to make some changes to your app.
 
@@ -250,7 +250,7 @@ For whatever reason, while the url on the EB dashboard works on the site for the
 
 Update: Now you can add changes to the CLIENT_URL='http://countability.bwrd.io' to the env.ts file (in server),  and similar url changes in environment.ts (in client).
 
-Also make sure to update the IP Address in Route 53.  Search for Route 53, then under 'DNS Management' option on the Dashboard,, click on 'Hosted Zones', then click on bwrd.io, then select countability.bwrd.io, and change the IPv4 address to what it should be.  The most recent IP address can be found in the Elastic Container Service.  Just follow the directions in the first paragraph of this section.
+Also make sure to update the IP Address in Route 53.  Search for Route 53, then under 'DNS Management' option on the Dashboard, click on 'Hosted Zones', then click on bwrd.io, then select countability.bwrd.io, and change the IPv4 address to what it should be.  The most recent IP address can be found in the Elastic Container Service.  Just follow the directions in the first paragraph of this section.
 
 Random Notes
 
