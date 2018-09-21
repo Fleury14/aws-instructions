@@ -51,7 +51,6 @@ The first step will be uploading the images into a docker image repository onto 
 
 - Open your docker terminal if you are on Windows. I believe Mac's have the docker machine initialized automatically so you can go to a normal terminal.
 Run the aws cli command listed on the push instructions:
-`acd`
 There is a differnet command listed for Windows users, but I was able to run the above command as long as my docker terminal was up.
 The result of this command should be a large docker login string. That is the next command to run; copy that line, paste it into your terminal and run it.
 
