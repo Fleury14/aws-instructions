@@ -210,8 +210,7 @@ You can also use `eb local status` in a seperate terminal to check the status of
 
 To do this, you will need to search services for *IAM*. Under IAM resources click on *Roles: #* and find `aws-elasticbeanstalk-ec2-role` and click on it. Under the permissions tab, you will need to click the `Attach` button and apply the `AmazonEC2ContainerRegistryReadOnly` policy. This gives EB access to the images you just pushed.
 
-### Step 6: git add/commit your Dockerrun.aws.json file
-e
+### Step 6: git add/commit your Dockerrun.aws.json files
 Or else it will not read it.
 
 ### Step 7: Create your environment
