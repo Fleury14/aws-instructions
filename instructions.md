@@ -38,6 +38,9 @@ When deploying to AWS you will have to change how your .env is processed. Becaus
 You will need to install both the AWS CLI and the EB CLI. Both CLIs will also require Python to be installed as it utilizes the pip command.
 
 [AWS CLI installation instructions](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+
+
+
 [EB CLI Installation instruction](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html)
 
 
@@ -51,13 +54,18 @@ The first step will be uploading the images into a docker image repository onto 
 
 - Open your docker terminal if you are on Windows. I believe Mac's have the docker machine initialized automatically so you can go to a normal terminal.
 Run the aws cli command listed on the push instructions:
-`acd`
+`$(aws ecr get-login --no-include-email --region us-west-2)`
+
 There is a differnet command listed for Windows users, but I was able to run the above command as long as my docker terminal was up.
 The result of this command should be a large docker login string. That is the next command to run; copy that line, paste it into your terminal and run it.
 
 - You will need to build the container for the respective repo with the following command:
 `docker build -t <your-container-production-name> <directory-of-the-container>`
 For example, my command was *➜  ~ docker build -t countability-client noble-one-client-multi/ 
+
+// for today:       docker build -t >>>>>countability-tnr-sandbox-client>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> noble-one-client-multi
+                    docker build -t >>>>>countability-tnr-sandbox-server>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> noble-one-server-multi
+                    docker build -t >>>>>countability-tnr-sandbox-client>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> noble-one-client-multi
 **NOTE:** Keep track of the name you are giving your container, you will need it later
 **FURTHER BUILD NOTE** If you are using volumes to mount your local files to mirror the files on the container, you will need to adjust your build because AWS will not have access to files on your computer. In my case, this required adding a line to the *Dockerfile* that copies the contents of my folder into the container. If you choose this process as well, I would also recommend adding a **.dockerignore** to avoid copying your node modules, since those will be instantiated upon build.
 
